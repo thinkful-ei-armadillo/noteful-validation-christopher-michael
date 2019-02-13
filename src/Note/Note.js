@@ -29,7 +29,7 @@ class Note extends React.Component {
                
                .then(data => {
                  callback(id)
-                 this.props.onDeleteNote();
+                 this.onDeleteNote(id);
                })
                .catch(error => {
                  console.log(error);
