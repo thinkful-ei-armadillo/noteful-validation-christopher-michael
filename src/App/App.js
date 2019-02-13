@@ -13,16 +13,25 @@ import NoteContext from '../NoteContext'
 import './App.css'
 
 class App extends Component {
-  //static contextType = NoteContext; 
-
   state = {
     notes: [],
     folders: [],
   };
 
   componentDidMount() {
-    // fake date loading from API call
-    setTimeout(() => this.setState(dummyStore), 600)
+    fetch('http://localhost:9090/folders')
+      .then(res => res.json())
+      .then(json => {
+        this.setState({folders: json});
+        console.log(this.state);
+      });
+
+    fetch('http://localhost:9090/notes')
+      .then(res => res.json())
+      .then(json => {
+        this.setState({notes: json});
+        console.log(this.state);
+      });
   }
 
   renderNavRoutes() {
