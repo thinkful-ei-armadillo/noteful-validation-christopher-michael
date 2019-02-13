@@ -9,9 +9,12 @@ import AddFolder from '../AddFolder/AddFolder'
 import AddNote from '../AddNote/AddNote'
 import dummyStore from '../dummy-store'
 import { getNotesForFolder, findNote, findFolder } from '../notes-helpers'
+import NoteContext from '../NoteContext'
 import './App.css'
 
 class App extends Component {
+  //static contextType = NoteContext; 
+
   state = {
     notes: [],
     folders: [],
@@ -79,10 +82,11 @@ class App extends Component {
               const { folderId } = routeProps.match.params
               const notesForFolder = getNotesForFolder(notes, folderId)
               return (
+                <NoteContext.Provider value={{notes:notesForFolder}}>
                 <NoteListMain
                   {...routeProps}
-                  notes={notesForFolder}
                 />
+                </NoteContext.Provider>
               )
             }}
           />
@@ -121,6 +125,10 @@ class App extends Component {
 
   render() {
     return (
+      <NoteContext.Provider value={{
+        notes: this.state.notes,
+        folders: this.state.folders
+      }}>
       <div className='App'>
         <nav className='App__nav'>
           {this.renderNavRoutes()}
@@ -136,6 +144,7 @@ class App extends Component {
           {this.renderMainRoutes()}
         </main>
       </div>
+      </NoteContext.Provider>
     )
   }
 }
