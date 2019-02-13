@@ -101,7 +101,10 @@ class App extends Component {
               const { folderId } = routeProps.match.params
               const notesForFolder = getNotesForFolder(notes, folderId)
               return (
-                <NoteContext.Provider value={{notes:notesForFolder}}>
+                <NoteContext.Provider value={{
+                  notes:notesForFolder,
+                  deleteNote: this.deleteNote
+                  }}>
                 <NoteListMain
                   {...routeProps}
                 />

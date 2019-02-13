@@ -14,6 +14,7 @@ class Note extends React.Component {
   handleDeleteNote = (id, callback) => {
     console.log('Note deleted');
     console.log(id);
+    console.log(callback);
     return fetch(`http://localhost:9090/notes/${id}`, {
             method: "DELETE",
     }) 
@@ -28,12 +29,13 @@ class Note extends React.Component {
                
                .then(data => {
                  callback(id)
+                 this.props.onDeleteNote();
                })
                .catch(error => {
                  console.log(error);
                })
                 
-
+    
   }
   // static contextType = NoteContext;
   render(){

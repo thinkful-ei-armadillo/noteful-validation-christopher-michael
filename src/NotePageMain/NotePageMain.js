@@ -4,11 +4,15 @@ import './NotePageMain.css'
 import NoteContext from '../NoteContext';
 
 export default function NotePageMain(props) {
+
+  const handleDeleteNote = id => {
+    this.props.history.push('/')
+  }
   console.log(props);
   const contextValue = {
-    notes: this.state.notes,
-        folders: this.state.folders,
-        handleDeleteNote: this.handleDeleteNote,
+    notes: props.notes,
+        folders: props.folders,
+        handleDeleteNote: props.handleDeleteNote,
         id: props.note.id,
         name: props.note.name,
         modified: props.note.modified
@@ -20,7 +24,7 @@ export default function NotePageMain(props) {
         id={props.note.id}
         name={props.note.name}
         modified={props.note.modified}
-        handleDeleteNote ={this.handleDeleteNote}
+        onDeleteNote ={handleDeleteNote}
       />
       
       <div className='NotePageMain__content'>
