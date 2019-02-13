@@ -10,17 +10,18 @@ class NoteListMain extends React.Component {
   static contextType = NoteContext;
 
   render() {
-    const { notes, folders } = this.context;
-
+    const { notes } = this.context;
+    console.log(notes); 
     return (
       <section className='NoteListMain'>
         <ul>
-          {notes.map(note =>
+          {this.context.notes.map(note =>
             <li key={note.id}>
               <Note
                 id={note.id}
                 name={note.name}
                 modified={note.modified}
+                handleDeleteNote={this.context.handleDeleteNote}
               />
             </li>
           )}

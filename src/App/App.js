@@ -34,6 +34,16 @@ class App extends Component {
       });
   }
 
+ deleteNote = id => {
+   console.log('delete works');
+   const newNotes = this.state.notes.filter(note => 
+     note.id !== id
+    )
+    this.setState({
+      notes: newNotes
+    })
+ }
+
   renderNavRoutes() {
     const { notes, folders } = this.state
     return (
@@ -136,7 +146,8 @@ class App extends Component {
     return (
       <NoteContext.Provider value={{
         notes: this.state.notes,
-        folders: this.state.folders
+        folders: this.state.folders,
+        deleteNote: this.deleteNote
       }}>
       <div className='App'>
         <nav className='App__nav'>
