@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   addNoteName = (id, noteName, content, folderId) => {
-    this.setState({notes:[...this.state.notes, {id: id, folderid: folderId, name: noteName, content: content}] })
+    this.setState({notes:[...this.state.notes, {id: id, folderId: folderId, name: noteName, content: content}] })
   }
 
   componentDidMount() {

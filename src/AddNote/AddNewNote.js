@@ -8,9 +8,7 @@ class AddNewNote extends React.Component{
         this.state = {
             name: '',
             content: '',
-            folderId: ''
-
-
+            folderId: 'b0715efe-ffaf-11e8-8eb2-f2801f1b9fd1'
         }
     }
     
@@ -18,15 +16,18 @@ class AddNewNote extends React.Component{
 
 
 
-    handleNewNote = (noteName) => {
-         fetch('http://localhost:9090/notes', {
+    handleNewNote = (noteEvent) => {
+        console.log(noteEvent); 
+        fetch('http://localhost:9090/notes', {
             method: 'POST',
             header:{
                 'Content Type': '/application/json'
             },
             body: JSON.stringify({
-                name: noteName,
-                
+                name: this.state.name,
+                content: this.state.content,
+                folderId: this.state.folderId, 
+                id: noteEvent.id,
             })
         })
         .then(res => {
@@ -37,7 +38,7 @@ class AddNewNote extends React.Component{
             return res.json(); })
         .then (data =>{ 
             console.log(data);
-            this.context.addNoteName(data.folderId, noteName); 
+            this.context.addNoteName(data.id, this.state.name,this.state.content, this.state.folderId); 
         })
         .catch(error =>{
             console.log(error); 
@@ -66,7 +67,7 @@ class AddNewNote extends React.Component{
             <section className="test">
                 <h2>Create A Note</h2>
                     <form className="Noteful-form" onSubmit={(event) => {event.preventDefault();
-                                                                        this.handleNewNote(event.currentTarget.newNoteName.value)}}>
+                                                                        this.handleNewNote(event)}}>
                         <label htmlFor="new-note-name">Name</label>
                         
                         <input name="newNoteName" type="text" id="new-note-name" onChange={e => this.updateName(e.target.value)}/>
