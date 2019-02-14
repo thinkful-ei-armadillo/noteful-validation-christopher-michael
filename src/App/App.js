@@ -19,6 +19,10 @@ class App extends Component {
     folders: [],
   };
 
+  addFolderName = (id, folderName) => {
+    this.setState({folders:[...this.state.folders, {id: id, name: folderName}] })
+  }
+
   componentDidMount() {
     fetch('http://localhost:9090/folders')
       .then(res => res.json())
@@ -151,7 +155,8 @@ class App extends Component {
       <NoteContext.Provider value={{
         notes: this.state.notes,
         folders: this.state.folders,
-        deleteNote: this.deleteNote
+        deleteNote: this.deleteNote,
+        addFolderName: this.addFolderName,  
       }}>
       <div className='App'>
         <nav className='App__nav'>
