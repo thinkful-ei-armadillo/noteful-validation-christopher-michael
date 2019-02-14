@@ -5,13 +5,12 @@ import NoteListNav from '../NoteListNav/NoteListNav'
 import NotePageNav from '../NotePageNav/NotePageNav'
 import NoteListMain from '../NoteListMain/NoteListMain'
 import NotePageMain from '../NotePageMain/NotePageMain'
-import AddFolder from '../AddFolder/AddFolder'
-import AddNote from '../AddNote/AddNote'
-import dummyStore from '../dummy-store'
+
 import { getNotesForFolder, findNote, findFolder } from '../notes-helpers'
 import NoteContext from '../NoteContext'
 import './App.css'
 import AddNewFolder from './../AddFolder/AddNewFolder'
+import AddNewNote from '../AddNote/AddNewNote';
 
 class App extends Component {
   state = {
@@ -21,6 +20,10 @@ class App extends Component {
 
   addFolderName = (id, folderName) => {
     this.setState({folders:[...this.state.folders, {id: id, name: folderName}] })
+  }
+
+  addNoteName = (id, noteName, content, folderId) => {
+    this.setState({notes:[...this.state.notes, {id: id, folderid: folderId, name: noteName, content: content}] })
   }
 
   componentDidMount() {
@@ -139,7 +142,7 @@ class App extends Component {
           path='/add-note'
           render={routeProps => {
             return (
-              <AddNote
+              <AddNewNote
                 {...routeProps}
                 folders={folders}
               />
@@ -156,7 +159,8 @@ class App extends Component {
         notes: this.state.notes,
         folders: this.state.folders,
         deleteNote: this.deleteNote,
-        addFolderName: this.addFolderName,  
+        addFolderName: this.addFolderName,
+        addNoteName: this.addNoteName  
       }}>
       <div className='App'>
         <nav className='App__nav'>
