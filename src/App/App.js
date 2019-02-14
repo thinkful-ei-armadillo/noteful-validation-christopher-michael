@@ -11,6 +11,7 @@ import dummyStore from '../dummy-store'
 import { getNotesForFolder, findNote, findFolder } from '../notes-helpers'
 import NoteContext from '../NoteContext'
 import './App.css'
+import AddNewFolder from './../AddFolder/AddNewFolder'
 
 class App extends Component {
   state = {
@@ -128,7 +129,7 @@ class App extends Component {
         />
         <Route
           path='/add-folder'
-          component={AddFolder}
+          component={AddNewFolder}
         />
         <Route
           path='/add-note'
