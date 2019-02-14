@@ -39,7 +39,7 @@ class NoteListNav extends React.Component {
           >
             <FontAwesomeIcon icon='plus' />
             <br />
-            <AddNewFolder />
+            Folder
           </CircleButton>
         </div>
       </div>
